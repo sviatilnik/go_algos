@@ -3,6 +3,7 @@ package circuit_breaker
 import (
 	"context"
 	"errors"
+	"fmt"
 	"sync"
 	"time"
 )
@@ -19,8 +20,8 @@ func Breaker(circuit Circuit, errorsThreshold uint) Circuit {
 		m.RLock()
 		// Вычисляем кол-во последних ошибок. Если они есть, то мы устанавливаем время следующей попытки
 		delta := failersCount - int(errorsThreshold)
-		if delta > 0 {
-			retryAt := lastAttempt.Add(time.Second * 1 << delta)
+		if delta >= 0 {
+			retryAt := lastAttempt.Add(time.Second * 5 << delta)
 			if !time.Now().After(retryAt) {
 				m.RUnlock()
 				return "", errors.New("service unavailable")
@@ -44,5 +45,23 @@ func Breaker(circuit Circuit, errorsThreshold uint) Circuit {
 		failersCount = 0
 
 		return resp, nil
+	}
+}
+
+func Sample() {
+	circuit1 := func(ctx context.Context) (string, error) {
+		time.Sleep(1 * time.Second)
+		return "", errors.New("OMG some error")
+	}
+
+	ctx := context.Background()
+	ctx, cancel := context.WithTimeout(ctx, 5*time.Second)
+	defer cancel()
+
+	breaker := Breaker(circuit1, 5)
+
+	for range 10 {
+		r, err := breaker(ctx)
+		fmt.Println(r, err)
 	}
 }
