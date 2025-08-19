@@ -9,7 +9,7 @@ import (
 
 type Circuit func(ctx context.Context) (string, error)
 
-func Debounce(circuit Circuit, d time.Duration) Circuit {
+func DebounceFirst(circuit Circuit, d time.Duration) Circuit {
 	var m sync.Mutex
 	var threshold time.Time // время исполнения следующего запроса
 	var result string
@@ -32,7 +32,7 @@ func Debounce(circuit Circuit, d time.Duration) Circuit {
 	}
 }
 
-func Sample() {
+func FirstSample() {
 	circuit1 := func(ctx context.Context) (string, error) {
 		select {
 		case <-ctx.Done():
@@ -47,7 +47,7 @@ func Sample() {
 	ctx, cancel := context.WithTimeout(ctx, 5*time.Second)
 	defer cancel()
 
-	debounce := Debounce(circuit1, 5*time.Second)
+	debounce := DebounceFirst(circuit1, 5*time.Second)
 
 	for range 10 {
 		r, err := debounce(ctx)
