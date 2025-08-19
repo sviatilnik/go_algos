@@ -7,11 +7,16 @@ import (
 
 func main() {
 	// startCircuitBreakerSample()
-	startDebounceFirstSample()
+	// startDebounceFirstSample()
+	startDebounceLastSample()
 }
 
 func startDebounceFirstSample() {
 	debounce.FirstSample()
+}
+
+func startDebounceLastSample() {
+	debounce.LastSample()
 }
 
 func startCircuitBreakerSample() {
