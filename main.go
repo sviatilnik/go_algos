@@ -4,13 +4,15 @@ import (
 	"github.com/sviatilnik/go_algos/circuit_breaker"
 	"github.com/sviatilnik/go_algos/debounce"
 	"github.com/sviatilnik/go_algos/retry"
+	"github.com/sviatilnik/go_algos/throttle"
 )
 
 func main() {
 	// startCircuitBreakerSample()
 	// startDebounceFirstSample()
 	// startDebounceLastSample()
-	retrySample()
+	// retrySample()
+	throttleSample()
 }
 
 func startDebounceFirstSample() {
@@ -27,4 +29,8 @@ func startCircuitBreakerSample() {
 
 func retrySample() {
 	retry.Sample()
+}
+
+func throttleSample() {
+	throttle.Sample()
 }
