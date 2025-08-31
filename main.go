@@ -5,6 +5,7 @@ import (
 	"github.com/sviatilnik/go_algos/debounce"
 	"github.com/sviatilnik/go_algos/retry"
 	"github.com/sviatilnik/go_algos/throttle"
+	"github.com/sviatilnik/go_algos/timeout"
 )
 
 func main() {
@@ -12,7 +13,9 @@ func main() {
 	// startDebounceFirstSample()
 	// startDebounceLastSample()
 	// retrySample()
-	throttleSample()
+	// throttleSample()
+
+	timeout.Sample()
 }
 
 func startDebounceFirstSample() {
@@ -33,4 +36,8 @@ func retrySample() {
 
 func throttleSample() {
 	throttle.Sample()
+}
+
+func TimeoutSample() {
+	timeout.Sample()
 }
