@@ -4,6 +4,7 @@ import (
 	"github.com/sviatilnik/go_algos/circuit_breaker"
 	"github.com/sviatilnik/go_algos/debounce"
 	"github.com/sviatilnik/go_algos/fanin"
+	"github.com/sviatilnik/go_algos/fanout"
 	"github.com/sviatilnik/go_algos/generator"
 	"github.com/sviatilnik/go_algos/heartbeat"
 	"github.com/sviatilnik/go_algos/retry"
@@ -20,7 +21,8 @@ func main() {
 	// timeout.Sample()
 	// FanInSample()
 	// GeneratorSample()
-	HeartbeatSample()
+	// HeartbeatSample()
+	FanOutSample()
 }
 
 func startDebounceFirstSample() {
@@ -57,4 +59,8 @@ func GeneratorSample() {
 
 func HeartbeatSample() {
 	heartbeat.Sample()
+}
+
+func FanOutSample() {
+	fanout.Sample()
 }
