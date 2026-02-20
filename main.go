@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/sviatilnik/go_algos/circuit_breaker"
+	"github.com/sviatilnik/go_algos/datastructures/liskenlist"
 	"github.com/sviatilnik/go_algos/debounce"
 	"github.com/sviatilnik/go_algos/fanin"
 	"github.com/sviatilnik/go_algos/fanout"
@@ -22,7 +23,9 @@ func main() {
 	// FanInSample()
 	// GeneratorSample()
 	// HeartbeatSample()
-	FanOutSample()
+	// FanOutSample()
+
+	liskenlist.LinkedListSample()
 }
 
 func startDebounceFirstSample() {
